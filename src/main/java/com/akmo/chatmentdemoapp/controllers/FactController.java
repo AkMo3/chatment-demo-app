@@ -29,6 +29,10 @@ public class FactController {
             URL url = new URL("https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=1");
             String response = sendGET(url.toString());
             response = response.substring(11, response.length() - 3);
+            if (response.length() > 100 || response.contains(";")) {
+                response = sendGET(url.toString());
+                response = response.substring(11, response.length() - 3);
+            }
             saveResponse(response, request);
             return ResponseEntity.ok().body(response);
         }
@@ -43,6 +47,10 @@ public class FactController {
             URL url = new URL("https://catfact.ninja/fact");
             String response = sendGET(url.toString());
             response = response.substring(9, response.length() - 15);
+            if (response.length() > 100 || response.contains(";")) {
+                response = sendGET(url.toString());
+                response = response.substring(9, response.length() - 15);
+            }
             saveResponse(response, request);
             return ResponseEntity.ok().body(response);
         }
